@@ -11,4 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (page === 'carrinho.html') {
         CarrinhoController.init();
     }
+
+    CarrinhoButtonController.init();
 });
