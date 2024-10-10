@@ -23,11 +23,6 @@
         <input type="text" id="busca-categoria" placeholder="Buscar por categoria">
         <input type="number" id="busca-preco-min" placeholder="Preço Mínimo" min="0">
         <input type="number" id="busca-preco-max" placeholder="Preço Máximo" min="0">
-        <button id="botao-buscar">Buscar</button>
-
-    </div>
-
-    <div id = "filtro-container">
         <label for="Classificacao"> Classificação Indicativa: </label>
                      <input list="indicativa" 
                             name="classInd"
@@ -40,8 +35,10 @@
                         <option value="16+"></option>
                         <option value="18+"></option>
                      </datalist>
+        <button id="botao-buscar">Buscar</button>
+
     </div>
-    
+        
     <div id="produtos-container"></div>
 
     <button onclick="window.location.href='carrinho.html'">Ver Carrinho</button>

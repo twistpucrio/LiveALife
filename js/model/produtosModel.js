@@ -25,40 +25,44 @@ const ProdutosModel = (() => {
     const buscarProdutos = (criterios) => {
         return produtos.filter(produto => {
             let corresponde = true;
-            console.log(`${produto}`)
+    
+            // Verificar nome
             if (criterios.nome) {
                 const nomeBusca = criterios.nome.toLowerCase();
                 const nomeProduto = produto.nome.toLowerCase();
                 corresponde = corresponde && nomeProduto.includes(nomeBusca);
             }
-
+    
+            // Verificar preço mínimo
             if (criterios.precoMin !== undefined) {
                 corresponde = corresponde && produto.preco >= criterios.precoMin;
             }
-
+    
+            // Verificar preço máximo
             if (criterios.precoMax !== undefined) {
                 corresponde = corresponde && produto.preco <= criterios.precoMax;
             }
-
-            if(criterios.categoria) {
-                console.log(`${criterios.categoria}`)
-                
+    
+            // Verificar categoria (ajustado para parar ao encontrar correspondência)
+            if (criterios.categoria) {
                 const nomeCatBusca = criterios.categoria.toLowerCase();
-                
-                produto.categorias.forEach( categoria => {
-                    categoria_lower = categoria.toLowerCase();
-                    console.log(`${categoria_lower}`)
-                    match = categoria_lower.includes(nomeCatBusca);
-                    console.log(`match = ${match}`)
-                    if(!match)
-                        corresponde = false;
-                } );
-                
+                const temCategoria = produto.categorias.some(categoria => 
+                    categoria.toLowerCase().includes(nomeCatBusca)
+                );
+                corresponde = corresponde && temCategoria;
             }
-            console.log(`match = ${match}`)
+    
+            // Verificar classificação indicativa
+            if (criterios.classInd) {
+                const classIndBusca = criterios.classInd.toLowerCase();
+                const classIndProduto = produto.classificacao.toLowerCase();
+                corresponde = corresponde && classIndProduto.includes(classIndBusca);
+            }
+    
             return corresponde;
         });
     };
+    
 
     return {
         carregarProdutos,
